@@ -8,7 +8,7 @@ export default function HomeScreen() {
       <FlatList
         data={meditations}
         className='bg-white'
-        contentContainerClassName='gap-4 p-4' //NativeWind
+        contentContainerClassName='gap-8 p-4' //NativeWind
         renderItem={({ item }) => <MeditationListItem meditation={item} />}
       />
     </>
