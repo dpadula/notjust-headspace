@@ -12,13 +12,13 @@ const MeditationDetails = () => {
   if (!meditation) {
     return (
       <View>
-        <Text className='text-2xl font-bold'>Meditation not found</Text>
+        <Text className='text-2xl font-bold mt-16'>Meditation not found</Text>
       </View>
     );
   }
   return (
     <View>
-      <Text className='text-2xl font-bold'>{meditation?.title}</Text>
+      <Text className='text-2xl font-bold mt-16'>{meditation?.title}</Text>
     </View>
   );
 };
