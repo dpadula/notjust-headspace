@@ -11,7 +11,7 @@ type MeditationListItemProps = {
 
 const MeditationListItem = ({ meditation }: MeditationListItemProps) => {
   return (
-    <Link href={`/meditation/details/`} asChild>
+    <Link href={`/meditation/${meditation.id}`} asChild>
       <Pressable className='flex-row items-center gap-5'>
         <View className='bg-green-700 p-2 rounded-full'>
           <FontAwesome name='check' size={16} color='white' />
