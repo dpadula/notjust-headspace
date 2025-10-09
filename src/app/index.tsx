@@ -1,23 +1,14 @@
-import { FlatList, Text, View } from 'react-native';
-import { meditations } from '../data';
-import { Meditation } from '../types';
+import MeditationListItem from '@/components/MeditationListItem';
+import { meditations } from '@/data';
+import { FlatList } from 'react-native';
 
-type MeditationListItemProps = {
-  meditation: Meditation;
-};
-
-const MeditationListItem = ({ meditation }: MeditationListItemProps) => {
-  return (
-    <View className='p-5 m-5 border border-gray-300 rounded-2xl '>
-      <Text className='text-xl font-semi-bold'>{meditation.title}</Text>
-    </View>
-  );
-};
 export default function HomeScreen() {
   return (
     <>
       <FlatList
         data={meditations}
+        className='bg-white'
+        contentContainerClassName='gap-4 p-4' //NativeWind
         renderItem={({ item }) => <MeditationListItem meditation={item} />}
       />
     </>
