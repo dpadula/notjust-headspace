@@ -1,32 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
+import { meditations } from '../data';
 
-export default function HomeScreen() {
+const meditation = meditations[0];
+
+type MeditationListItemProps = {
+  item: typeof meditation;
+};
+
+const MeditationListItem = ({ item: meditation }: MeditationListItemProps) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text className='text-4xl font-bold p-10'>
-          This is the first page of your app.
-        </Text>
-      </View>
+    <View className='p-5 m-5 border border-gray-300 rounded-2xl '>
+      <Text className='text-xl font-semi-bold'>{meditation.title}</Text>
     </View>
   );
+};
+export default function HomeScreen() {
+  return (
+    <>
+      <FlatList data={meditations} renderItem={MeditationListItem} />
+    </>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    maxWidth: 960,
-    marginHorizontal: 'auto',
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: 'bold',
-  },
-});
