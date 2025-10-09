@@ -1,5 +1,6 @@
 import { meditations } from '@/data';
-import { useLocalSearchParams } from 'expo-router';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -17,9 +18,18 @@ const MeditationDetails = () => {
     );
   }
   return (
-    <View>
+    <>
       <Text className='text-2xl font-bold mt-16'>{meditation?.title}</Text>
-    </View>
+      <AntDesign
+        onPress={() => {
+          router.back();
+        }}
+        className='absolute top-16 right-4'
+        name='close'
+        size={24}
+        color='black'
+      />
+    </>
   );
 };
 
