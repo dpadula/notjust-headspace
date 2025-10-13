@@ -89,7 +89,8 @@ const MeditationDetails = () => {
               style={{ width: '100%', height: 40 }}
               value={statusPlayer.currentTime / statusPlayer.duration}
               onSlidingComplete={(value) => {
-                console.log(value);
+                console.log(value * statusPlayer.duration);
+                player.seekTo(value * statusPlayer.duration);
               }}
               minimumValue={0}
               maximumValue={1}
