@@ -2,6 +2,7 @@ import { meditations } from '@/data';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Slider from '@react-native-community/slider';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -61,9 +62,14 @@ const MeditationDetails = () => {
             />
           </View>
           <View>
-            <View className='bg-zinc-700 h-2 flex-row items-center'>
-              <View className='bg-zinc-700 rounded-full w-4 aspect-square' />
-            </View>
+            <Slider
+              style={{ width: '100%', height: 40 }}
+              minimumValue={0}
+              maximumValue={1}
+              minimumTrackTintColor='#3A3937'
+              maximumTrackTintColor='#3A393755'
+              thumbTintColor='#3A3937'
+            />
           </View>
           <View className='flex-row justify-between p-1'>
             <Text className='text-zinc-800 font-semibold'>0:00</Text>
