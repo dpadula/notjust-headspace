@@ -45,13 +45,10 @@ const MeditationDetails = () => {
       <Pressable className='bg-zinc-800 self-center items-center justify-center w-20 aspect-square rounded-full mt-10'>
         <FontAwesome6 name='play' size={24} color='snow' />
       </Pressable>
-      {/* <View className='bg-zinc-800 self-center items-center justify-center w-20 aspect-square rounded-full mt-10'>
-        <FontAwesome6 name='pause' size={24} color='snow' />
-      </View> */}
       {/* Player */}
       <View className='flex-1'>
-        <View className='p-10 mt-auto'>
-          <View className='flex-row items-center justify-between'>
+        <View className='p-10 mt-auto gap-5'>
+          <View className='flex-row justify-between'>
             <MaterialCommunityIcons
               name='broadcast'
               size={32}
@@ -62,6 +59,17 @@ const MeditationDetails = () => {
               size={32}
               color='#3A3937'
             />
+          </View>
+          <View>
+            <View className='bg-zinc-700 h-2 flex-row items-center'>
+              <View className='bg-zinc-700 rounded-full w-4 aspect-square' />
+            </View>
+          </View>
+          <View className='flex-row justify-between p-1'>
+            <Text className='text-zinc-800 font-semibold'>0:00</Text>
+            <Text className='text-zinc-800 font-semibold'>
+              {meditation?.duration}:00
+            </Text>
           </View>
         </View>
       </View>
