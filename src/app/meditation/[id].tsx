@@ -5,7 +5,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Slider from '@react-native-community/slider';
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -16,6 +16,15 @@ const MeditationDetails = () => {
 
   const player = useAudioPlayer(audio);
   const statusPlayer = useAudioPlayerStatus(player);
+
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [seekValue, setSeekValue] = useState(0);
+  const [wasPlaying, setWasPlaying] = useState(false);
+
+  const currentProgress =
+    statusPlayer && statusPlayer.duration
+      ? statusPlayer.currentTime / statusPlayer.duration
+      : 0;
 
   const meditation = meditations.find(
     (meditation) => meditation.id === Number(id)
@@ -87,16 +96,32 @@ const MeditationDetails = () => {
           <View>
             <Slider
               style={{ width: '100%', height: 40 }}
-              value={statusPlayer.currentTime / statusPlayer.duration}
-              onSlidingComplete={(value) => {
-                console.log(value * statusPlayer.duration);
-                player.seekTo(value * statusPlayer.duration);
-              }}
+              value={isSeeking ? seekValue : currentProgress}
               minimumValue={0}
               maximumValue={1}
               minimumTrackTintColor='#3A3937'
               maximumTrackTintColor='#3A393755'
               thumbTintColor='#3A3937'
+              onSlidingStart={() => {
+                // Si estaba reproduciendo, pausamos y lo recordamos
+                if (statusPlayer.playing) {
+                  player.pause();
+                  setWasPlaying(true);
+                }
+                setIsSeeking(true);
+              }}
+              onValueChange={(value) => {
+                setSeekValue(value);
+              }}
+              onSlidingComplete={async (value) => {
+                setIsSeeking(false);
+                player.seekTo(value * statusPlayer.duration);
+                // Si estaba reproduciendo antes, reanuda
+                if (wasPlaying) {
+                  player.play();
+                  setWasPlaying(false);
+                }
+              }}
             />
           </View>
           <View className='flex-row justify-between p-1'>
