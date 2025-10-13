@@ -20,6 +20,13 @@ const MeditationDetails = () => {
   const meditation = meditations.find(
     (meditation) => meditation.id === Number(id)
   );
+
+  const formatSeconds = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  };
+
   if (!meditation) {
     return (
       <View>
@@ -92,9 +99,11 @@ const MeditationDetails = () => {
             />
           </View>
           <View className='flex-row justify-between p-1'>
-            <Text className='text-zinc-800 font-semibold'>0:00</Text>
             <Text className='text-zinc-800 font-semibold'>
-              {meditation?.duration}:00
+              {formatSeconds(statusPlayer.currentTime)}
+            </Text>
+            <Text className='text-zinc-800 font-semibold'>
+              {formatSeconds(statusPlayer.duration)}
             </Text>
           </View>
         </View>
