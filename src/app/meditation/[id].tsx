@@ -3,7 +3,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Slider from '@react-native-community/slider';
-import { useAudioPlayer } from 'expo-audio';
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -15,6 +15,7 @@ const MeditationDetails = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const player = useAudioPlayer(audio);
+  const statusPlayer = useAudioPlayerStatus(player);
 
   const meditation = meditations.find(
     (meditation) => meditation.id === Number(id)
@@ -51,12 +52,15 @@ const MeditationDetails = () => {
       {/* Play and Pasuse Button */}
       <Pressable
         onPress={() => {
-          console.log('play');
-          player.play();
+          statusPlayer.playing ? player.pause() : player.play();
         }}
         className='bg-zinc-800 self-center items-center justify-center w-20 aspect-square rounded-full mt-10'
       >
-        <FontAwesome6 name='play' size={24} color='snow' />
+        <FontAwesome6
+          name={statusPlayer.playing ? 'pause' : 'play'}
+          size={24}
+          color='snow'
+        />
       </Pressable>
       {/* Player */}
       <View className='flex-1'>
