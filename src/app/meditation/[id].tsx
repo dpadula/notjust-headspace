@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 // const audio = require('../../../assets/meditations/audio1.mp3');
 import audio from '../../../assets/meditations/audio1.mp3';
+import AnimatedBackground from '../../components/AnimatedBackground';
 const MeditationDetails = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
 
@@ -36,6 +37,7 @@ const MeditationDetails = () => {
   }
   return (
     <SafeAreaView className='flex-1 bg-orange-400 justify-between'>
+      <AnimatedBackground />
       {/* Header */}
       <View className='flex-1'>
         <View className='flex-row items-center justify-between px-10 mt-4'>
