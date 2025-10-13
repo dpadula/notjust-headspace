@@ -64,6 +64,10 @@ const MeditationDetails = () => {
           <View>
             <Slider
               style={{ width: '100%', height: 40 }}
+              value={0.5}
+              onSlidingComplete={(value) => {
+                console.log(value);
+              }}
               minimumValue={0}
               maximumValue={1}
               minimumTrackTintColor='#3A3937'
